@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sana Özel...</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+        /* Arka plan: Romantik pembe geçişli */
+        background: radial-gradient(
+          circle at 50% 50%,
+          #fff0f3 0%,
+          #ffc1e3 100%
+        );
+        height: 100vh;
+        overflow: hidden;
+        font-family: "Cinzel", serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      /* --- SABİT BÜYÜK BUKET (Emoji) --- */
+      .main-bouquet-emoji {
+        position: absolute;
+        bottom: -5px;
+        font-size: 15rem;
+        z-index: 10;
+        text-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        animation: popUpEmoji 2s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+          forwards;
+        pointer-events: none;
+        transform-origin: bottom center;
+      }
+
+      @keyframes popUpEmoji {
+        0% {
+          transform: translateY(100%) scale(0.6);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+      }
+
+      .message-container {
+        position: absolute;
+        top: 15%;
+        z-index: 20;
+        text-align: center;
+        width: 100%;
+        animation: fadeInDown 2s ease-out;
+        padding: 0 20px;
+      }
+
+      h1 {
+        font-family: "Great Vibes", cursive;
+        font-size: 5rem; /* Başlık boyutu */
+        color: #a80038; /* Koyu Bordo */
+        margin: 0;
+        text-shadow: 0 4px 10px rgba(255, 255, 255, 0.8),
+          0 0 20px rgba(255, 192, 203, 0.8);
+        line-height: 1.2;
+      }
+
+      p {
+        font-size: 1.8rem; /* Alt yazı boyutu */
+        color: #5c1b2e;
+        margin-top: 15px;
+        font-weight: 700; /* Kalın yazı */
+        letter-spacing: 2px;
+        text-transform: uppercase; /* Hepsi büyük harf */
+      }
+
+      /* --- UÇUŞAN EMOJİLER --- */
+      .falling-emoji-flower {
+        position: absolute;
+        bottom: -150px;
+        font-size: 3rem;
+        pointer-events: none;
+        z-index: 5;
+        animation: floatUp linear forwards;
+        text-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .flower-front {
+        z-index: 15;
+        filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+      }
+      .flower-back {
+        z-index: 1;
+        filter: blur(4px);
+        opacity: 0.7;
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-120vh) rotate(360deg);
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Parlama Efekti */
+      .glow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.8) 0%,
+          rgba(255, 255, 255, 0) 70%
+        );
+        z-index: 0;
+        opacity: 0.5;
+        animation: pulse 4s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 0.3;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow"></div>
+
+    <div class="message-container">
+      <h1>Hoş Geldin Sevgilim</h1>
+      <p>SENİ ÇOK SEVİYORUM ❤️</p>
+    </div>
+
+    <div class="main-bouquet-emoji">💐</div>
+
+    <script>
+      const flowerEmojis = [
+        "🌹",
+        "🌷",
+        "🌸",
+        "🌼",
+        "🌺",
+        "💖",
+        "✨",
+        "🥰",
+        "🦋",
+      ];
+
+      function createEmojiFlower() {
+        const span = document.createElement("span");
+        span.classList.add("falling-emoji-flower");
+        span.innerText =
+          flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+
+        // Rastgele boyut
+        const size = Math.random() * 2 + 2;
+        span.style.fontSize = size + "rem";
+
+        // Rastgele konum
+        span.style.left = Math.random() * 100 + "vw";
+
+        // Rastgele hız
+        const duration = Math.random() * 5 + 4;
+        span.style.animationDuration = duration + "s";
+
+        // Derinlik
+        if (Math.random() > 0.5) {
+          span.classList.add("flower-back");
+        } else {
+          span.classList.add("flower-front");
+        }
+
+        document.body.appendChild(span);
+
+        setTimeout(() => {
+          span.remove();
+        }, duration * 1000);
+      }
+
+      setInterval(createEmojiFlower, 200);
+
+      for (let i = 0; i < 20; i++) {
+        setTimeout(createEmojiFlower, i * 100);
+      }
+    </script>
+  </body>
+</html>
